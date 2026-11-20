@@ -35,6 +35,7 @@
 22. Tiêu chí nghiệm thu (checklist hoàn thành)
 23. Lộ trình làm theo giai đoạn
 24. Những điều KHÔNG được làm
+25. Game tham khảo & tính năng học hỏi (**đọc kỹ: có thay đổi một số mục trên**)
 
 ---
 
@@ -668,6 +669,151 @@ Game được coi là **xong** khi tất cả đều đúng:
 
 ---
 
+## 25. GAME THAM KHẢO & TÍNH NĂNG HỌC HỎI
+
+> Mục này tổng hợp từ 5 game web cùng thể loại mà người dùng gửi. **Chỉ học cơ chế và ý tưởng**, không chép chữ, hình, âm thanh, tên nhân vật hay code của họ (xem mục 0 và 24).
+> Mức ưu tiên: **[BẮT BUỘC]** = phải có, **[NÊN CÓ]** = làm nếu kịp, **[TUỲ CHỌN]** = để sau cùng.
+
+### 25.1 Tình trạng các game tham khảo (kiểm tra ngày 20/11/2026)
+
+| Game | Link | Tình trạng | Ghi chú chính |
+|---|---|---|---|
+| Tiệm Mì Cay | aenhatrang.com | Đang chạy | Phong phú nhất: cấp cay 0–7, luộc mì canh kim vào vùng xanh, nhân viên, thú cưng, khách quen có cốt truyện, đánh giá và trả lời đánh giá, sự kiện ngẫu nhiên, bảng xếp hạng online |
+| Một Ổ Nha! (bánh mì) | hhuync.github.io/mot-o-nha | Đang chạy, mã nguồn công khai trên GitHub | JS thuần + DOM/CSS + ảnh PNG; yêu cầu riêng của khách ("không rau", "thêm ớt"); nhấn giữ để bóp sốt và rót trà; quầy nước riêng; đánh giá sao; nhiệm vụ hằng ngày; sự kiện theo mùa và giao diện (skin) |
+| Tiệm Xôi Bà Tám | tiemxoibatam.io.vn | Web chỉ còn trang thông báo, game đã chuyển thành app trên App Store và Google Play | Trang web có tính năng **sao lưu tiến trình** bằng file hoặc mã để chuyển sang app |
+| Spa | spa.tabbisfriends.asia | Không truy cập được (deployment bị tạm dừng) | – |
+| Tiệm Trà Nhỏ (trà sữa) | trongnhi…workers.dev | Đã đóng cửa, chỉ còn ảnh thông báo | – |
+
+### 25.2 Nhận xét chung về các game này
+
+1. Đều là **web chạy trên điện thoại, màn hình dọc, PWA** (thêm vào màn hình chính, chơi như app).
+2. Đều **chia theo "ngày bán hàng"**: chuẩn bị (nhập hàng) → mở cửa → khách đến → kết ca → tổng kết thu chi. Không chia theo màn có đồng hồ đếm ngược.
+3. **Khách có cá tính**: xưng hô đúng vai vế (bà, chú, chị, em...), có lời thoại, có đánh giá sao sau khi ăn.
+4. **Tiến triển dài hạn**: cấp độ tiệm và danh hiệu, mở khoá món, nâng cấp, trang trí, nhiệm vụ hằng ngày, quà điểm danh.
+5. **Chữ tiếng Việt tự nhiên, có chất đời thường**, đây là phần tạo cảm xúc nhiều nhất.
+6. Thao tác **không chỉ là chạm**: có nhấn giữ, canh thời điểm, vuốt chuyển quầy.
+
+### 25.3 Thay đổi so với các mục trên
+
+| Mục cũ | Thay đổi |
+|---|---|
+| 3. Công nghệ | Cho phép **JS thuần + DOM/CSS** (giống game bánh mì) thay cho Phaser. Cách này dễ làm giao diện chữ tiếng Việt đẹp, dễ sửa. AI chọn một trong hai và ghi lý do. |
+| 6, 10. Màn chơi | Giữ 15 màn, nhưng gọi là **"Ngày 1" đến "Ngày 15"** và thêm bước **chuẩn bị đầu ngày** (25.4). Thay đồng hồ đếm ngược bằng **số khách trong ngày** (ví dụ ngày 1 có 8 khách, ngày 15 có 18 khách). Hết khách thì kết ca. **[NÊN CÓ]** Nếu thấy phức tạp, giữ đồng hồ như cũ. |
+| 9. Sao | Thêm **đánh giá của từng khách** (25.7). Sao của ngày bằng trung bình sao của khách. |
+
+### 25.4 Chuẩn bị đầu ngày và kho nguyên liệu [NÊN CÓ]
+
+- Mỗi nguyên liệu có **tồn kho** (ví dụ 10 phần). Mỗi món làm xong trừ kho.
+- Màn **"Chuẩn bị ngày N"** trước khi mở cửa:
+  - Dự báo: thời tiết (☀️ Nắng đẹp, 🌧️ Mưa, 🥵 Nắng nóng, 🌬️ Gió mùa) và số khách dự kiến "8–10 khách".
+  - Nhập thêm hàng: mỗi nguyên liệu một nút "+5 phần · 9k".
+  - Mở khoá nguyên liệu mới bằng tiền.
+  - Nút lớn "Mở cửa ngày N".
+- Hết hàng giữa ca → trạm nguyên liệu hiện "Hết" màu xám. Khách gọi món có nguyên liệu đó sẽ đổi món hoặc buồn bỏ đi.
+- Để không khó với người chơi tặng quà: **luôn có nút "Nhập nhanh"** giữa ca, giá gấp đôi.
+
+### 25.5 Thao tác đa dạng [BẮT BUỘC: ít nhất 2 loại ngoài chạm]
+
+| Thao tác | Dùng cho | Chi tiết |
+|---|---|---|
+| **Chạm** | Thêm nguyên liệu thường | Như mục 6 |
+| **Nhấn giữ đến khi vòng tròn đầy** | Rưới mỡ hành, chan nước sốt, rót trà hoặc sữa đậu | Giữ 0,8 giây (rót đồ uống 2 giây). Vòng tròn tiến độ quanh ngón tay. Thả sớm thì không tính. Phát âm thanh rót hoặc bóp trong lúc giữ. |
+| **Canh thời điểm (kim vào vùng xanh)** | Chiên trứng, nướng chả, pha cà phê | Thanh ngang có kim chạy từ trái sang phải. Vùng **xanh** = chín vừa (thưởng +10% tiền), vùng **vàng** trước và sau = tạm được, vùng **đỏ** cuối = cháy. Chạm để lấy ra. Nâng cấp "Bếp to lửa" làm vùng xanh rộng hơn. Thay cho cơ chế "chín sau X giây" ở mục 7. |
+| **Vuốt ngang** | Chuyển giữa quầy đồ ăn và quầy nước | Có nút mũi tên ở hai bên cho ai không quen vuốt. Có chấm chỉ quầy đang đứng. |
+
+### 25.6 Yêu cầu riêng của khách [BẮT BUỘC]
+
+- Bong bóng gọi món có thêm **dòng ghi chú** màu cam, ví dụ:
+  - "không hành", "thêm trứng", "ít ruốc", "nhiều đá"
+  - **Độ cay 0–3** cho món có tương ớt: 🌶️ hiện bằng số quả ớt. Chọn độ cay bằng cách chạm chai tương nhiều lần (mỗi lần +1 cấp, hiện số trên khay).
+- Từ ngày 3: 30% đơn có 1 yêu cầu riêng. Từ ngày 8: 50% đơn, tối đa 2 yêu cầu.
+- Làm đúng yêu cầu: +5k tip và câu khen "Nhớ ý chị ghê!". Sai yêu cầu: tính là sai món.
+- **Sổ công thức** 📖: nút ở góc màn chơi, mở ra danh sách món đã mở khoá kèm hình nguyên liệu đúng thứ tự. Mở sổ **không** dừng thời gian (trừ ngày 1–2).
+
+### 25.7 Đánh giá của khách [BẮT BUỘC]
+
+- Sau khi ăn, khách để lại **1–5 sao**, dựa trên kiên nhẫn còn lại lúc nhận món:
+  - ≥ 60% → 5 sao, ≥ 35% → 4 sao, ≥ 15% → 3 sao, còn lại → 2 sao. Sai món → 1 sao.
+  - Nâng cấp "Quạt máy" hạ mỗi ngưỡng 5%.
+- Hiện sao nhỏ bay lên trên đầu khách khi rời đi.
+- **Sổ đánh giá** (từ màn hình chính): danh sách đánh giá kèm 1 câu nhận xét lấy từ mẫu có biến, ví dụ "{món} ngon số một khu này, {xưng hô} sẽ quay lại!". AI tự viết ít nhất 40 câu gốc theo 3 nhóm: khen, góp ý nhẹ, chê vì chờ lâu.
+- **[TUỲ CHỌN]** Trả lời đánh giá: chọn 1 trong 3 câu trả lời ("Cảm ơn ạ", "Xin lỗi, lần sau quán làm nhanh hơn", câu đùa). Trả lời tử tế cho đánh giá ≤ 3 sao thì khách sửa thành +1 sao.
+- Điểm trung bình tiệm (ví dụ ⭐ 4,7) hiện ở thanh trên.
+
+### 25.8 Xưng hô đúng vai vế [BẮT BUỘC]
+
+Mỗi loại khách có bộ xưng hô riêng, dùng trong lời gọi món và đánh giá:
+
+| Khách | Khách tự xưng | Gọi chủ tiệm | Mẫu câu gọi món |
+|---|---|---|---|
+| Học sinh | em | chị | "Chị ơi cho em {món} nha!" |
+| Nhân viên văn phòng | anh / chị | em | "Em ơi cho anh {món}, anh tranh thủ!" |
+| Cô bán rau | cô | con | "Con ơi cho cô {món} nghen!" |
+| Anh shipper | anh | em | "Như mọi khi nha em, anh vội!" |
+| Bà cụ | bà | cháu | "Cháu ơi, cho bà {món} nghen cháu!" |
+| Bạn bè | tớ / mình | tên bạn gái | "{herName} ơi, cho mình {món}!" |
+| "Anh" | anh | em / biệt danh | Câu riêng ở mục 19.5 |
+
+### 25.9 Khách quen có cốt truyện [NÊN CÓ, rất hợp làm quà]
+
+- Một số khách có tên riêng và **chuỗi chuyện 4–5 chương**. Mỗi lần ghé (cách nhau 1–3 ngày) mở 1 chương: một đoạn kể ngắn và **2 lựa chọn** cách đối xử. Lựa chọn nào cũng tốt, chỉ khác phần thưởng (tip, thêm khách ngày mai, quà trang trí).
+- Hết chuỗi → khách thành **"Khách ruột"**: tip gấp đôi, có huy hiệu ❤️ trên đầu.
+- **Chuyện của "Anh"** là chuỗi đặc biệt: mỗi chương là **một kỷ niệm thật** của hai người (lấy từ `memories` trong `personal.js`). Lựa chọn của người chơi quyết định câu trả lời "Anh" nói tiếp. Chương cuối nối vào EndingScene.
+- AI viết 3 khách quen gốc với chuyện của riêng họ (ví dụ một bác xe ôm, một chị văn phòng, một bé học sinh). Không dùng lại tên hay cốt truyện của game tham khảo.
+
+### 25.10 Sự kiện và thời tiết trong ngày [NÊN CÓ]
+
+| Sự kiện | Tác dụng |
+|---|---|
+| 🌧️ Trời mưa | Khách ít hơn 15%, hay gọi đồ nóng, nền có mưa |
+| 🥵 Nắng nóng | Khách gọi nước nhiều gấp đôi |
+| 🎒 Học sinh tan trường | Giữa ca một nhóm 3 học sinh đến cùng lúc |
+| 💰 Ngày lãnh lương | Tip gấp đôi |
+| 🏮 Lễ hội phố | Khách đông hơn 30% |
+| ⭐ Người review ghé | Một khách đặc biệt, đánh giá tính gấp 3 |
+
+- Mỗi ngày có tối đa 1 sự kiện, báo trước ở màn Chuẩn bị.
+- **Sự cố nhỏ** [TUỲ CHỌN], tối đa 1 lần mỗi ngày: nước đổ trước quầy (chạm 3 lần để lau, trong lúc đó bếp chậm lại), mèo hoang ghé (chạm cho ăn thì +1 tim).
+
+### 25.11 Thú cưng của tiệm [NÊN CÓ]
+
+- 1 con thú nằm trước quầy (mặc định là mèo; mua thêm cún và hamster ở mục Trang trí).
+- Chạm vào thú → hoạt ảnh nhỏ và 1 câu ngẫu nhiên ("Mèo dụi đầu vào tay em", "Mèo ngáp một cái thật dài"). Mỗi con có ít nhất 5 câu.
+- **[ĐIỀN: tên thú cưng thật của hai người nếu có]**: dùng tên đó làm tên mèo.
+
+### 25.12 Tiến triển dài hạn [NÊN CÓ]
+
+- **Cấp tiệm và danh hiệu**: mỗi món bán được +XP. Các mốc danh hiệu do AI đặt, ví dụ "Gánh hàng nhỏ" → "Tiệm đầu ngõ" → "Tiệm quen khu phố" → "Tiệm nổi tiếng" → "Tiệm của {herName}, nhất quả đất".
+- **Nhiệm vụ hằng ngày**: 3 nhiệm vụ mỗi ngày (thật, theo giờ Việt Nam), ví dụ "Bán 10 phần xôi gà", "Phục vụ 5 khách 5 sao liên tiếp". Mỗi nhiệm vụ thưởng 20–40k.
+- **Quà điểm danh 7 ngày**: mỗi ngày mở game nhận quà, ngày 7 nhận quà lớn và **1 lời nhắn ngắn từ "Anh"** `[ĐIỀN: 7 câu nhắn]`.
+- **Sổ thu chi** cuối ngày: doanh thu, tiền nhập hàng, tip, lãi. Chỉ để xem, không có phí điện nước phạt người chơi.
+- **Chơi lại ngày**: lưu một điểm khôi phục đầu mỗi ngày. Trong menu tạm dừng có nút "Làm lại ngày này".
+
+### 25.13 Giao diện theo mùa (skin) [TUỲ CHỌN]
+
+- Bộ giao diện đổi nền, quầy và bảng thực đơn: Mặc định, **Trung Thu** (đèn lồng), **Tết** (hoa mai, câu đối), **Valentine** (trái tim hồng), **Noel**.
+- Tự gợi ý skin phù hợp khi đến đúng dịp; mua bằng tiền trong game.
+
+### 25.14 Kỹ thuật học được [BẮT BUỘC]
+
+1. **Âm thanh trên iPhone**: dùng **Web Audio API** (AudioContext + AudioBuffer giải mã sẵn) cho tiếng hiệu ứng để không bị trễ. Khi quay lại app từ nền: gọi `resume()`, nếu context đã `closed` thì tạo lại. Tiếng bấm liên tục dùng một nhóm (pool) 3–4 nguồn âm.
+2. **Màn tải**: tải trước toàn bộ hình và âm thanh, có thanh %, mỗi tài nguyên chờ tối đa 8 giây, toàn bộ tối đa 20 giây. Quá thời gian thì vẫn vào game, tài nguyên lỗi thì dùng emoji thay thế.
+3. **Chặn thao tác trình duyệt**: `-webkit-tap-highlight-color: transparent`, `-webkit-touch-callout: none` (không hiện menu lưu ảnh khi giữ), `-webkit-user-drag: none` cho ảnh, `overscroll-behavior: none`, `touch-action: manipulation`.
+4. **Vùng tai thỏ**: `viewport-fit=cover` và `padding: env(safe-area-inset-top)` / `env(safe-area-inset-bottom)`.
+5. **Khung game trên máy tính**: cột giữa rộng tối đa 460px, hai bên tô nền và đổ bóng.
+6. **Khoá lưu có phiên bản** (ví dụ `tiemcuaem_save_v1`). Đổi cấu trúc save thì tăng số và viết hàm chuyển đổi save cũ.
+7. **Sao lưu và khôi phục**: trong Cài đặt có "Sao chép mã sao lưu" (save JSON → nén → base64, bắt đầu bằng `TIEM1-`) và "Dán mã để khôi phục". Có cảnh báo: "Đừng gửi mã qua Messenger hoặc Zalo vì tin nhắn dài có thể bị cắt."
+8. **Service worker** phải đổi tên bộ nhớ đệm mỗi lần cập nhật (ví dụ `tiem-v3`). Có màn "Có gì mới" hiện một lần sau mỗi bản cập nhật.
+9. **Mở trong Messenger, Zalo, Facebook**: trình duyệt bên trong các app này hay chặn lưu và âm thanh. Phát hiện bằng userAgent rồi hiện gợi ý "Mở bằng Safari hoặc Chrome để chơi mượt hơn".
+10. **Không dùng bảng xếp hạng online, đăng nhập hay Google Analytics**: game tặng riêng, không cần server.
+
+### 25.15 Hướng dẫn chơi dạng thẻ [BẮT BUỘC]
+
+- Ngoài hướng dẫn tương tác ở màn 1 (mục 13.4), có **bộ 6–8 thẻ hướng dẫn** xem lại được từ Cài đặt → "Cách chơi". Mỗi thẻ có ảnh minh hoạ, tiêu đề, 2 dòng giải thích, nút "← Trước" và "Tiếp →", số thẻ "3 / 7".
+- Lần đầu chơi phải xem hết mới vào được. Từ lần sau có nút ✕ để bỏ qua.
+
+---
+
 ## PHỤ LỤC A — CÂU HỎI NGƯỜI DÙNG CẦN TRẢ LỜI TRƯỚC KHI BẮT ĐẦU
 
 1. Tên / biệt danh bạn gái? Tên / biệt danh của bạn?
@@ -680,6 +826,9 @@ Game được coi là **xong** khi tất cả đều đúng:
 8. Câu nói riêng của hai người cho khách "Anh"?
 9. Chơi qua **link web** hay cần **file APK**?
 10. Có ngày cụ thể cần tặng không (sinh nhật, kỷ niệm) để ưu tiên tiến độ?
+11. Chia theo **màn có đồng hồ** (mục 10) hay theo **ngày bán hàng có nhập hàng** như các game tham khảo (mục 25.3–25.4)?
+12. Hai người có thú cưng thật không? Tên là gì (mục 25.11)?
+13. 7 câu nhắn ngắn cho quà điểm danh 7 ngày (mục 25.12)?
 
 ## PHỤ LỤC B — CÂU LỆNH MẪU ĐỂ DÁN CHO AI
 
