@@ -877,6 +877,34 @@ Mỗi loại khách có bộ xưng hô riêng, dùng trong lời gọi món và 
 12. Hai người có thú cưng thật không? Tên là gì (mục 25.11)?
 13. 7 câu nhắn ngắn cho quà điểm danh 7 ngày (mục 25.12)?
 
+## PHỤ LỤC C — QUY TRÌNH: GEMINI CHỐT NỘI DUNG → CLAUDE LÀM GAME
+
+**Bước 1 (Gemini):** Gemini **không viết code**. Gemini chỉ phỏng vấn người dùng, điền mọi chỗ `[ĐIỀN: ...]`, giải quyết các chỗ còn để chọn (ví dụ câu 11 Phụ lục A), rồi xuất ra **bản đặc tả cuối cùng**.
+
+**Bước 2 (Claude):** Người dùng đưa bản cuối cho Claude (khuyên dùng Claude Code để Claude tự tạo file, chạy thử, đưa lên GitHub Pages). Claude làm theo Phụ lục B và mục 23.
+
+**Yêu cầu cho bản cuối mà Gemini xuất ra:**
+1. Một file Markdown duy nhất, tên `game-spec-FINAL.md`, giữ **nguyên cấu trúc mục 0–25** của tài liệu này.
+2. **Không còn** chỗ `[ĐIỀN: ...]` nào. Chỗ nào người dùng chưa muốn trả lời thì ghi rõ `MẶC ĐỊNH: <giá trị>`.
+3. Ghi **đầy đủ** nội dung `personal.js` (tên, ngày, 15 kỷ niệm, lời nhắn, bạn bè, câu nói của "Anh", 7 câu điểm danh) trong một khối code ở mục 2.
+4. Mỗi chỗ đã chọn giữa 2 phương án, ghi `ĐÃ CHỐT: ...` và **xoá phương án không dùng** để Claude không phải đoán.
+5. Không tự thêm tính năng mới ngoài tài liệu. Muốn thêm thì liệt kê ở cuối, trong mục "Ý tưởng để sau".
+6. Không bịa con số mới. Nếu đổi số nào thì ghi `ĐÃ ĐỔI: cũ → mới, lý do`.
+7. Cuối file có mục **"Danh sách ảnh cần chuẩn bị"**: tên file `assets/memories/01.jpg` … `15.jpg`, mỗi ảnh ứng với kỷ niệm nào.
+
+**Câu lệnh dán cho Gemini:**
+
+```
+Đính kèm là tài liệu đặc tả game tặng bạn gái. Bạn KHÔNG viết code.
+Nhiệm vụ của bạn:
+1. Đọc hết tài liệu, nhất là Phụ lục A và Phụ lục C.
+2. Hỏi tôi từng nhóm câu (mỗi lần tối đa 5 câu) để điền mọi chỗ [ĐIỀN: ...] và chốt các lựa chọn còn mở.
+   Gợi ý sẵn 2–3 phương án cho mỗi câu để tôi chọn nhanh.
+3. Khi đủ thông tin, xuất ra game-spec-FINAL.md đúng theo "Yêu cầu cho bản cuối" ở Phụ lục C.
+```
+
+---
+
 ## PHỤ LỤC B — CÂU LỆNH MẪU ĐỂ DÁN CHO AI
 
 ```
