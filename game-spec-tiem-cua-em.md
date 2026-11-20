@@ -62,7 +62,8 @@
 | Tổng số màn | 15 màn chính + 1 màn bí mật |
 | Tổng thời gian chơi hết | khoảng 30–45 phút |
 | Độ khó | Dễ → vừa. Mục tiêu là **vui và cảm động**, không phải khó |
-| Bối cảnh | Một tiệm ăn sáng nhỏ ở góc phố Việt Nam: mái hiên, bàn nhựa, đèn vàng, có cây hoa giấy |
+| Món chủ đề | **Bánh tráng**: trộn, nướng, cuốn, kèm trà tắc và nước mía (mục 7) |
+| Bối cảnh | Một xe và tiệm bánh tráng vỉa hè trước cổng trường lúc chiều tà: mái hiên sọc, ghế nhựa đỏ, bếp than hồng, dây đèn vàng, cây hoa giấy |
 | Nhân vật chính | Chủ tiệm = bạn gái (đứng sau quầy, không bắt buộc hiện hình; nếu hiện thì là nhân vật chibi tóc dài, tạp dề hồng) |
 | Thông điệp | Mỗi màn qua được mở một kỷ niệm của hai người; màn cuối là lời nhắn đặc biệt |
 
@@ -81,7 +82,7 @@ window.PERSONAL = {
   myName: "Anh",                // [ĐIỀN: tên/biệt danh của bạn] — khách đặc biệt "Anh" ghé tiệm
   shopName: "Tiệm của Em",      // tên biển hiệu; nếu để trống sẽ tự thành "Tiệm của " + herName
   anniversary: "2024-02-14",    // [ĐIỀN: ngày quen nhau, YYYY-MM-DD] — dùng để đếm số ngày bên nhau
-  favoriteDish: "xoi_ga",       // [ĐIỀN: id món cô ấy thích nhất, xem mục 7] — món này cho x2 tiền
+  favoriteDish: "bt_tron_kho_bo", // [ĐIỀN: id món bánh tráng cô ấy thích nhất, xem mục 7.3] — món này cho x2 tiền
   welcomeMessage: "Chào mừng bà chủ nhỏ của anh đến với tiệm! 💕",
   finalMessage: "Cảm ơn em vì đã ở bên anh. Tiệm này mãi là của em. Yêu em! ❤️",
   // 15 kỷ niệm, mỗi màn qua mở 1 cái. photo = đường dẫn ảnh trong thư mục assets/memories/
@@ -195,8 +196,8 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 1. **Khách xuất hiện** ở vị trí trống, đi vào từ bên phải (0,6 giây), dừng lại, hiện **bong bóng gọi món** phía trên đầu.
 2. Bong bóng hiện **hình món ăn** + các nguyên liệu nhỏ bên dưới (để người chơi biết công thức). Có **thanh kiên nhẫn** ngang dưới bong bóng.
 3. Người chơi **chạm vào trạm nguyên liệu** → nguyên liệu bay vào **khay đang được chọn** (khay chọn có viền vàng `#FFC94D` dày 6px). Chạm vào khay khác để đổi khay chọn.
-4. Nguyên liệu phải thêm **đúng thứ tự công thức**. Sai thứ tự hoặc sai nguyên liệu → món thành "món hỏng" (hiện khói xám nhẹ), chỉ có thể bỏ vào thùng rác.
-5. Nguyên liệu **cần nấu** (ví dụ trứng chiên, chả) phải đặt lên **bếp** trước: chạm trạm → món lên bếp → chờ thanh nấu đầy (xem thời gian ở mục 7) → chạm vào để lấy. Nếu để quá 5 giây sau khi chín → **cháy** (màu đen, có khói) → chỉ bỏ đi được.
+4. **Đế** (bánh tráng / ly) phải có trước, **bước kết thúc** (lắc / gấp / cuốn / rót) làm sau cùng; topping ở giữa thứ tự tuỳ ý (chi tiết mục 7.1). Thêm topping khi chưa có đế → không nhận, đồ đựng rung nhẹ.
+5. Món **nướng** làm trên **vỉ than** theo thanh canh lửa (mục 7.1). Để kim chạy vào vùng đỏ → **cháy** (màu đen, có khói) → chỉ bỏ đi được.
 6. Khi khay đã đủ món → chạm vào khay rồi chạm vào khách (hoặc **kéo thả** khay lên khách). Hỗ trợ cả 2 cách.
 7. Giao **đúng món** → khách vui (biểu cảm 😍), trả tiền + tiền tip, đồng xu bay lên HUD, khách đi ra bên trái.
 8. Giao **sai món** → khách lắc đầu (😕), món bị trả lại khay, mất 10% kiên nhẫn.
@@ -229,54 +230,92 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 
 ---
 
-## 7. THỰC ĐƠN, NGUYÊN LIỆU, CÔNG THỨC
+## 7. THỰC ĐƠN, NGUYÊN LIỆU, CÔNG THỨC — CHỦ ĐỀ BÁNH TRÁNG 🫓
 
-> Chủ đề mặc định: **tiệm ăn sáng Việt Nam** (xôi + bánh mì + nước). Người dùng có thể đổi trong `config.js`.
-> `[ĐIỀN: nếu muốn món khác, ví dụ trà sữa/bánh tráng trộn, ghi ở đây]`
+> **Chủ đề chính thức: tiệm bánh tráng vỉa hè**, vì bạn gái người dùng mê bánh tráng.
+> Tiệm có **3 khu làm món + 1 quầy nước**, mỗi khu có cách làm (thao tác) riêng để game không nhàm chán.
+> Mọi giá, thời gian, ngày mở khoá đều nằm trong `config.js`.
 
-### 7.1 Nguyên liệu (trạm)
+### 7.1 Bốn khu làm món
 
-| id | Tên hiển thị | Emoji tạm (nếu chưa có hình) | Cần nấu? | Thời gian nấu | Mở ở màn |
+| Khu | Đồ đựng | Cách làm | Mở từ màn |
+|---|---|---|---|
+| 🥣 **Quầy trộn** | Bịch nilon hoặc tô | 1) Chạm **bánh tráng sợi** trước (luôn là bước đầu). 2) Thêm topping, **thứ tự tuỳ ý**. 3) Chạm **sốt/tắc**. 4) Bấm nút **"Lắc!"** rồi lắc: **vuốt qua lại 6 lần** trên bịch (hoặc chạm nhanh 6 lần), thanh "Độ đều" đầy thì xong. Chưa lắc mà giao → khách chê "Chưa trộn đều nè!" (tính sai món). | 1 |
+| 🔥 **Bếp nướng than** | Vỉ nướng (2 vỉ, nâng cấp lên 3) | 1) Chạm **bánh tráng tròn** để đặt lên vỉ. 2) Chạm **trứng cút** (đập trứng), rồi **nhấn giữ 1 giây** để tán đều trứng (vòng tròn đầy). 3) Thêm topping, thứ tự tuỳ ý. 4) Thanh **canh lửa**: kim chạy từ trái sang phải trong 6 giây; vùng **xanh** = giòn vừa (+10% tiền), vàng = tạm được, **đỏ** = cháy (bỏ đi). Chạm vỉ để **gấp đôi bánh** và lấy ra đĩa. 5) Chạm **sốt** cuối cùng (mayonnaise / tương ớt). | 4 |
+| 🌯 **Quầy cuốn** | Thớt tre | 1) Chạm **bánh tráng phơi sương** để trải ra thớt. 2) Thêm nhân, thứ tự tuỳ ý. 3) **Vuốt từ dưới lên** để cuốn (hoạt ảnh cuộn tròn). 4) Thêm **chén nước chấm** (chạm). | 7 |
+| 🧋 **Quầy nước** | Ly nhựa | 1) Chạm **ly**. 2) **Nhấn giữ 2 giây** để rót (vòng tròn đầy). 3) Chạm **đá**. 4) Tuỳ món: thêm tắc hoặc topping. Quầy nước nằm bên phải, **vuốt ngang** hoặc bấm mũi tên ▶ để chuyển sang. | 2 |
+
+**Quy tắc thứ tự (thay cho mục 6.2 bước 4):** chỉ **bước đầu** (đế bánh tráng / ly) và **bước cuối** (lắc / gấp / cuốn / rót) là bắt buộc đúng chỗ. Topping ở giữa **bỏ theo thứ tự nào cũng được**, nhưng phải **đủ và không thừa**. Thừa topping → khách nói "Chị đâu có gọi cái này!" (sai món). Thiếu → "Còn thiếu {topping} nè em!".
+
+**Độ cay (sa tế / ớt):** từ màn 3, đơn có biểu tượng 🌶️ x0 đến x3. Chạm hũ **sa tế** mỗi lần +1 cấp, số cấp hiện trên đồ đựng. Sai độ cay tính là sai món.
+
+### 7.2 Nguyên liệu
+
+| id | Tên hiển thị | Emoji tạm | Khu | Mở ở màn | Giá nhập 5 phần (nếu dùng kho, mục 25.4) |
 |---|---|---|---|---|---|
-| `xoi` | Xôi trắng | 🍚 | Không | – | 1 |
-| `hanh_phi` | Hành phi | 🧅 | Không | – | 1 |
-| `ga_xe` | Gà xé | 🍗 | Không | – | 1 |
-| `ruoc` | Ruốc | 🟫 | Không | – | 3 |
-| `trung` | Trứng | 🥚 | **Có** | 3 giây | 4 |
-| `cha` | Chả | 🥓 | **Có** | 4 giây | 7 |
-| `xoi_gac` | Xôi gấc | 🔴 | Không | – | 9 |
-| `banh_mi` | Ổ bánh mì | 🥖 | Không | – | 5 |
-| `pate` | Pa-tê | 🟤 | Không | – | 5 |
-| `dua_leo` | Dưa leo | 🥒 | Không | – | 5 |
-| `tra_da` | Trà đá | 🧊 | Không | – | 2 |
-| `sua_dau` | Sữa đậu nành | 🥛 | Không | – | 8 |
-| `ca_phe` | Cà phê sữa | ☕ | **Có** (pha) | 5 giây | 11 |
+| `bt_soi` | Bánh tráng sợi | 🍜 | Trộn | 1 | 5k |
+| `kho_bo` | Khô bò | 🥩 | Trộn, Cuốn | 1 | 15k |
+| `trung_cut` | Trứng cút | 🥚 | Trộn, Nướng | 1 | 8k |
+| `xoai` | Xoài xanh bào | 🥭 | Trộn | 1 | 6k |
+| `rau_ram` | Rau răm | 🌿 | Trộn, Cuốn | 1 | 3k |
+| `dau_phong` | Đậu phộng rang | 🥜 | Trộn, Nướng | 1 | 4k |
+| `tac` | Tắc (quất) vắt | 🍋 | Trộn, Nước | 1 | 3k |
+| `sa_te` | Sa tế | 🌶️ | Trộn, Nướng | 3 | 5k |
+| `kho_muc` | Khô mực xé | 🦑 | Trộn | 3 | 18k |
+| `hanh_phi` | Hành phi | 🧅 | Trộn, Nướng, Cuốn | 2 | 4k |
+| `muoi_tom` | Muối tôm | 🧂 | Trộn, Cuốn | 5 | 4k |
+| `bo_beo` | Bơ béo (sốt bơ) | 🧈 | Trộn, Cuốn | 5 | 8k |
+| `bt_tron` | Bánh tráng tròn (nướng) | ⚪ | Nướng | 4 | 5k |
+| `hanh_la` | Hành lá | 🌱 | Nướng | 4 | 3k |
+| `xuc_xich` | Xúc xích | 🌭 | Nướng | 6 | 12k |
+| `pho_mai` | Phô mai | 🧀 | Nướng | 9 | 15k |
+| `cha_bong` | Chà bông | 🟫 | Nướng, Cuốn | 6 | 10k |
+| `mayo` | Mayonnaise | 🥫 | Nướng | 4 | 6k |
+| `tuong_ot` | Tương ớt | 🔴 | Nướng | 4 | 5k |
+| `bt_phoi_suong` | Bánh tráng phơi sương | 📃 | Cuốn | 7 | 6k |
+| `thit_luoc` | Thịt luộc | 🥓 | Cuốn | 7 | 15k |
+| `rau_song` | Rau sống | 🥬 | Cuốn | 7 | 4k |
+| `nuoc_cham` | Nước chấm me | 🫙 | Cuốn | 7 | 5k |
+| `tom_kho` | Tép (tôm khô) | 🦐 | Trộn | 10 | 12k |
+| `ly` | Ly nhựa | 🥤 | Nước | 2 | 2k |
+| `tra` | Bình trà | 🫖 | Nước | 2 | 3k |
+| `da` | Đá | 🧊 | Nước | 2 | 1k |
+| `nuoc_mia` | Nước mía | 🎋 | Nước | 8 | 8k |
+| `tran_chau` | Trân châu | ⚫ | Nước | 11 | 6k |
 
-- Trạm "cần nấu" chiếm 1 ô bếp. Số ô bếp mặc định: **2** (nâng cấp lên 3, 4).
-- Ô bếp có thanh tiến độ tròn quanh nguyên liệu: đang nấu = cam `#FF9F43`, chín = xanh `#5BD67A` + lấp lánh, sắp cháy (còn 2 giây) = đỏ nhấp nháy.
+### 7.3 Công thức món
 
-### 7.2 Công thức món (thứ tự bắt buộc từ trái sang phải)
+> Cột "Topping" là danh sách cần đủ, **thứ tự tuỳ ý**. "Đế" và "Kết thúc" bắt buộc đúng chỗ.
 
-| id | Tên món | Công thức | Giá gốc | Mở ở màn |
-|---|---|---|---|---|
-| `xoi_trang` | Xôi trắng hành phi | xoi → hanh_phi | 10 | 1 |
-| `xoi_ga` | Xôi gà | xoi → ga_xe → hanh_phi | 18 | 1 |
-| `tra_da_ly` | Ly trà đá | tra_da | 3 | 2 |
-| `xoi_ruoc` | Xôi ruốc | xoi → ruoc → hanh_phi | 15 | 3 |
-| `xoi_trung` | Xôi trứng | xoi → trung(chín) → hanh_phi | 20 | 4 |
-| `banh_mi_pate` | Bánh mì pa-tê | banh_mi → pate → dua_leo | 15 | 5 |
-| `banh_mi_trung` | Bánh mì trứng | banh_mi → trung(chín) → dua_leo | 18 | 6 |
-| `xoi_cha` | Xôi chả | xoi → cha(chín) → hanh_phi | 22 | 7 |
-| `sua_dau_ly` | Ly sữa đậu | sua_dau | 8 | 8 |
-| `xoi_gac_ga` | Xôi gấc gà | xoi_gac → ga_xe → hanh_phi | 25 | 9 |
-| `banh_mi_full` | Bánh mì đặc biệt | banh_mi → pate → cha(chín) → trung(chín) → dua_leo | 35 | 10 |
-| `ca_phe_ly` | Cà phê sữa đá | ca_phe(chín) → tra_da | 15 | 11 |
-| `xoi_thap_cam` | Xôi thập cẩm | xoi → ga_xe → ruoc → cha(chín) → trung(chín) → hanh_phi | 45 | 12 |
-| `combo_tinh_yeu` | **Combo Tình Yêu** 💕 | xoi_gac → ga_xe → trung(chín) → hanh_phi, kèm 1 ly sua_dau (2 khay) | 60 | 14 |
+| id | Tên món | Khu | Đế | Topping | Kết thúc | Giá | Mở ở màn |
+|---|---|---|---|---|---|---|---|
+| `bt_tron_co_ban` | Bánh tráng trộn cơ bản | Trộn | bt_soi | xoai, rau_ram, dau_phong | tac → Lắc | 15k | 1 |
+| `bt_tron_kho_bo` | Bánh tráng trộn khô bò | Trộn | bt_soi | kho_bo, trung_cut, xoai, rau_ram, dau_phong | tac → Lắc | 25k | 1 |
+| `tra_da` | Trà đá | Nước | ly | – | rót tra → da | 3k | 2 |
+| `tra_tac` | Trà tắc | Nước | ly | tac | rót tra → da | 10k | 2 |
+| `bt_tron_hanh_phi` | Bánh tráng trộn hành phi | Trộn | bt_soi | trung_cut, hanh_phi, rau_ram, dau_phong | tac → Lắc | 20k | 2 |
+| `bt_tron_kho_muc` | Bánh tráng trộn khô mực | Trộn | bt_soi | kho_muc, trung_cut, xoai, rau_ram, sa_te (theo cấp cay) | tac → Lắc | 30k | 3 |
+| `bt_nuong_trung` | Bánh tráng nướng trứng | Nướng | bt_tron | trung_cut (đập + tán), hanh_la, dau_phong | canh lửa → gấp → mayo | 18k | 4 |
+| `bt_bo` | Bánh tráng bơ | Trộn | bt_soi | bo_beo, muoi_tom, hanh_phi, rau_ram | Lắc | 22k | 5 |
+| `bt_nuong_xuc_xich` | Bánh tráng nướng xúc xích | Nướng | bt_tron | trung_cut, xuc_xich, hanh_la, cha_bong | canh lửa → gấp → tuong_ot | 25k | 6 |
+| `bt_cuon_bo` | Bánh tráng cuốn bơ | Cuốn | bt_phoi_suong | bo_beo, muoi_tom, cha_bong, kho_bo | Vuốt cuốn → nuoc_cham | 25k | 7 |
+| `bt_cuon_thit` | Bánh tráng phơi sương cuốn thịt | Cuốn | bt_phoi_suong | thit_luoc, rau_song, rau_ram | Vuốt cuốn → nuoc_cham | 30k | 7 |
+| `nuoc_mia_ly` | Nước mía | Nước | ly | tac | rót nuoc_mia → da | 12k | 8 |
+| `bt_nuong_pho_mai` | Bánh tráng nướng phô mai | Nướng | bt_tron | trung_cut, pho_mai, xuc_xich, hanh_la | canh lửa → gấp → mayo | 32k | 9 |
+| `bt_tron_dac_biet` | Bánh tráng trộn đặc biệt | Trộn | bt_soi | kho_bo, kho_muc, tom_kho, trung_cut, xoai, rau_ram, dau_phong, hanh_phi | tac → Lắc | 40k | 10 |
+| `tra_sua_tran_chau` | Trà sữa trân châu | Nước | ly | tran_chau | rót tra → da | 20k | 11 |
+| `combo_tinh_yeu` | **Combo Tình Yêu** 💕 | 2 khu | – | 1 phần **món cô ấy thích nhất** (`favoriteDish`) + 1 ly trà tắc, giao cùng lúc | – | 60k | 14 |
 
-- **Món đồ uống** làm trên khay riêng như món khác.
-- **Một khách có thể gọi 2 món** (từ màn 8): bong bóng hiện 2 hình; phải giao đủ cả 2 (giao từng món một, món đã giao hiện dấu ✓).
-- Món `favoriteDish` trong `personal.js`: **giá x2** và có viền hồng lấp lánh trong bong bóng.
+- **Một khách có thể gọi 2 món** (từ màn 8), thường là 1 món bánh tráng + 1 ly nước.
+- Món `favoriteDish` (mặc định: `bt_tron_kho_bo`) có **giá x2** và viền hồng lấp lánh trong bong bóng gọi món.
+- Đóng gói: món trộn giao trong **bịch buộc dây thun** (hoạt ảnh buộc 0,3 giây sau khi lắc xong), món nướng trên **giấy gói**, món cuốn trên **hộp xốp**.
+
+### 7.4 Bố cục màn chơi theo khu (thay chi tiết cho mục 6.1)
+
+- Khu nguyên liệu (y 700–1180) hiện **các trạm của khu đang đứng**. Thanh tab nhỏ phía trên khu nguyên liệu: `🥣 Trộn | 🔥 Nướng | 🌯 Cuốn | 🧋 Nước`. Khu chưa mở hiện ổ khoá 🔒.
+- Đổi khu: chạm tab hoặc vuốt ngang. **Khay/đồ đựng đang làm dở được giữ nguyên** khi đổi khu.
+- Tab có **chấm đỏ** khi có khách đang chờ món của khu đó.
+- Bếp nướng luôn chạy kể cả khi đang đứng khu khác. Bánh sắp cháy (kim vào vùng đỏ) → tab 🔥 nhấp nháy đỏ và kêu "xèo xèo" to hơn.
 
 ---
 
@@ -293,7 +332,7 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 | Bà cụ | Tóc bạc, gậy | 35 giây | +2 | Đi vào chậm (1,2 giây) | 5 |
 | Bạn bè (tên từ `friends`) | Như khách thường + **bảng tên** trên đầu | 30 giây | +5 | Hiện lời chào "Ghé tiệm [herName] nè!" | 4 |
 | **"Anh"** (`myName`) | Áo hồng, cầm bó hoa 💐 | **Không bao giờ hết** | +20 | Xuất hiện **1 lần mỗi màn** từ màn 3, vào ngẫu nhiên giữa màn; khi được phục vụ thả 10 trái tim bay lên và câu nói ngẫu nhiên (mục 19.5) | 3 |
-| Mèo con | Mèo cam | 20 giây | 0, nhưng **+1 tim** | Chỉ gọi xoi_trang; rất hiếm (5%) | 7 |
+| Mèo con | Mèo cam | 20 giây | 0, nhưng **+1 tim** | Chỉ "gọi" 1 trứng cút (chạm trạm trứng cút rồi chạm mèo); rất hiếm (5%) | 7 |
 
 - Nếu chưa có hình vẽ: vẽ khách bằng hình tròn (đầu) + hình chữ nhật bo góc (thân), màu áo khác nhau, mặt bằng emoji. Vẫn phải phân biệt rõ từng loại.
 
@@ -324,18 +363,18 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 
 | Màn | Thời gian | Mục tiêu | spawnMin–Max (giây) | Hệ số kiên nhẫn | Mở mới | Ghi chú |
 |---|---|---|---|---|---|---|
-| 1 | 60 | 60k | 6–8 | 1.3 | xôi trắng, xôi gà | **Có hướng dẫn từng bước** |
-| 2 | 70 | 90k | 5–7 | 1.25 | trà đá | Gợi ý: "Đồ uống cũng làm trên khay nha" |
-| 3 | 75 | 120k | 5–7 | 1.2 | xôi ruốc | Khách "Anh" xuất hiện lần đầu |
-| 4 | 80 | 150k | 4.5–6.5 | 1.2 | trứng (bếp) | **Hướng dẫn bếp** |
-| 5 | 80 | 180k | 4.5–6 | 1.15 | bánh mì pa-tê | |
-| 6 | 90 | 220k | 4–6 | 1.15 | bánh mì trứng | Mở chiêu đặc biệt 💖 |
-| 7 | 90 | 260k | 4–5.5 | 1.1 | chả (bếp) | |
-| 8 | 90 | 300k | 4–5.5 | 1.1 | sữa đậu | Khách gọi 2 món |
-| 9 | 100 | 350k | 3.5–5 | 1.05 | xôi gấc | |
-| 10 | 100 | 400k | 3.5–5 | 1.05 | bánh mì đặc biệt | Màn "Ngày mưa" (hiệu ứng mưa, nhạc nhẹ) |
-| 11 | 100 | 450k | 3.5–5 | 1.0 | cà phê | |
-| 12 | 110 | 520k | 3–4.5 | 1.0 | xôi thập cẩm | |
+| 1 | 60 | 60k | 6–8 | 1.3 | BT trộn cơ bản, BT trộn khô bò | **Có hướng dẫn từng bước (quầy trộn)** |
+| 2 | 70 | 90k | 5–7 | 1.25 | quầy nước (trà đá, trà tắc), BT trộn hành phi | Hướng dẫn ngắn: vuốt sang quầy nước, nhấn giữ để rót |
+| 3 | 75 | 120k | 5–7 | 1.2 | BT trộn khô mực, độ cay sa tế | Khách "Anh" xuất hiện lần đầu |
+| 4 | 80 | 150k | 4.5–6.5 | 1.2 | **bếp nướng**, BT nướng trứng | **Hướng dẫn bếp nướng** (đập trứng, giữ tán, canh lửa, gấp) |
+| 5 | 80 | 180k | 4.5–6 | 1.15 | bánh tráng bơ | |
+| 6 | 90 | 220k | 4–6 | 1.15 | BT nướng xúc xích | Mở chiêu đặc biệt 💖 |
+| 7 | 90 | 260k | 4–5.5 | 1.1 | **quầy cuốn**, BT cuốn bơ, BT phơi sương cuốn thịt | Hướng dẫn vuốt để cuốn |
+| 8 | 90 | 300k | 4–5.5 | 1.1 | nước mía | Khách gọi 2 món |
+| 9 | 100 | 350k | 3.5–5 | 1.05 | BT nướng phô mai | |
+| 10 | 100 | 400k | 3.5–5 | 1.05 | BT trộn đặc biệt | Màn "Ngày mưa": khách gọi đồ nướng nhiều gấp đôi |
+| 11 | 100 | 450k | 3.5–5 | 1.0 | trà sữa trân châu | |
+| 12 | 110 | 520k | 3–4.5 | 1.0 | – | Màn "Tan trường": nhóm học sinh đến liên tục |
 | 13 | 110 | 580k | 3–4.5 | 1.0 | – | Màn "Sáng Chủ Nhật" (đông khách) |
 | 14 | 120 | 650k | 3–4.5 | 1.0 | Combo Tình Yêu | |
 | 15 | 120 | 720k | 3–4 | 1.0 | – | Màn cuối: nền hoàng hôn, kết thúc mở EndingScene |
@@ -351,12 +390,13 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 | id | Tên | Cấp | Giá mỗi cấp | Tác dụng |
 |---|---|---|---|---|
 | `khay` | Thêm khay | 2 → 3 | 300k | 3 khay làm món |
-| `bep` | Thêm bếp | 2 → 3 → 4 | 200k, 450k | Thêm ô bếp |
-| `bep_nhanh` | Bếp to lửa | 0 → 3 | 150k, 300k, 500k | Giảm thời gian nấu 10% / 20% / 30% |
+| `bep` | Thêm vỉ nướng | 2 → 3 → 4 | 200k, 450k | Nướng nhiều bánh cùng lúc |
+| `bep_nhanh` | Than hồng loại 1 | 0 → 3 | 150k, 300k, 500k | Kim canh lửa chạy nhanh hơn 10/20/30% và vùng xanh rộng hơn |
 | `ghe` | Thêm chỗ khách | 3 → 4 | 400k | 4 vị trí khách (khách nhiều hơn, tiền nhiều hơn) |
 | `quat` | Quạt máy | 0 → 2 | 200k, 400k | Kiên nhẫn khách +10% / +20% |
 | `nhac` | Loa nhạc | 0 → 1 | 250k | Tip +20% |
-| `chong_chay` | Chảo chống dính | 0 → 1 | 300k | Thời gian trước khi cháy tăng từ 5 lên 10 giây |
+| `chong_chay` | Quạt than tay | 0 → 1 | 300k | Vùng vàng sau vùng xanh dài gấp đôi, khó cháy hơn |
+| `lac_nhanh` | Bịch dây kéo | 0 → 1 | 200k | Lắc chỉ cần 4 lần thay vì 6 |
 | Trang trí (chỉ để đẹp) | Đèn lồng, chậu hoa giấy, biển tên neon, mèo thần tài, rèm hồng | 1 | 100k–300k | Hiện trong khung cảnh tiệm |
 
 - Mỗi thẻ nâng cấp: hình, tên, mô tả 1 dòng, cấp hiện tại (chấm tròn ●●○), giá, nút "Mua". Không đủ tiền → nút xám, chữ "Thiếu Xk".
@@ -382,8 +422,8 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 ## 13. GIAO DIỆN CHI TIẾT TỪNG MÀN HÌNH
 
 ### 13.1 Boot / Loading
-- Nền `#FFF6EC`. Giữa: biểu tượng chén xôi bốc khói (vẽ bằng code) nhún lên xuống.
-- Thanh tải 400×24, bo góc 12, nền `#FFE0C2`, phần đầy `#FF8FAB`. Dưới: "Đang nhóm bếp... 42%".
+- Nền `#FFF6EC`. Giữa: biểu tượng bịch bánh tráng trộn (vẽ bằng code) lắc qua lại.
+- Thanh tải 400×24, bo góc 12, nền `#FFE0C2`, phần đầy `#FF8FAB`. Dưới: "Đang nhóm than... 42%".
 
 ### 13.2 Màn hình chính
 - Nền: mặt tiền tiệm (mái hiên sọc hồng–trắng, biển hiệu ghi `shopName`).
@@ -405,10 +445,10 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 - **Menu tạm dừng**: lớp phủ đen 50%, bảng giữa: "Tạm dừng", nút "Chơi tiếp", "Chơi lại", "Về bản đồ", công tắc nhạc/âm thanh.
 - **Hướng dẫn (màn 1, 4)**: lớp phủ tối, khoét sáng vùng cần chạm, bàn tay 👆 nhấp nháy chỉ vào, khung chữ phía trên. Các bước màn 1:
   1. "Có khách rồi! Nhìn bong bóng để biết khách muốn gì nha."
-  2. "Chạm vào **Xôi trắng** trước."
-  3. "Rồi chạm **Gà xé**."
-  4. "Cuối cùng là **Hành phi**. Thứ tự quan trọng lắm đó!"
-  5. "Giờ chạm vào khay rồi chạm vào khách để giao món."
+  2. "Chạm **Bánh tráng sợi** trước để bỏ vào bịch."
+  3. "Giờ thêm **Xoài**, **Rau răm**, **Đậu phộng**. Cái nào trước cũng được!"
+  4. "Vắt **Tắc** vào rồi bấm **Lắc!** — vuốt qua lại thật đều tay nha!"
+  5. "Xong rồi! Chạm vào bịch rồi chạm vào khách để giao."
   6. "Giỏi quá! Khách hết kiên nhẫn sẽ bỏ đi, nhanh tay nha 💪"
   - Trong hướng dẫn thời gian không chạy và khách không mất kiên nhẫn.
 
@@ -461,7 +501,7 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 
 ### 14.4 Nguồn hình
 - Ưu tiên: **Kenney.nl** (CC0) – bộ "Food Kit", "UI Pack", "Toon Characters".
-- Thiếu hình món Việt (xôi, bánh mì...) → **vẽ bằng code** (Canvas/SVG) theo phong cách sticker ở 14.1, hoặc dùng emoji phóng to đặt trên đĩa tròn trắng.
+- Thiếu hình món Việt (bánh tráng, khô bò, xoài bào...) → **vẽ bằng code** (Canvas/SVG) theo phong cách sticker ở 14.1, hoặc dùng emoji phóng to đặt trên đĩa tròn trắng.
 - Giai đoạn 1 được phép dùng emoji toàn bộ; giai đoạn sau thay hình.
 
 ---
@@ -475,7 +515,10 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 | Khách đi ra | Trượt sang trái, mờ dần | 0,5 giây |
 | Bong bóng gọi món | Phóng to từ 0 lên 1 kiểu nảy (ease back-out) | 0,3 giây |
 | Nguyên liệu vào khay | Bay theo đường cong từ trạm đến khay, hạ xuống, khay nhún | 0,25 giây |
-| Đặt lên bếp | Rơi xuống + khói nhỏ bốc lên liên tục khi đang nấu | – |
+| Đặt lên vỉ than | Bánh tráng rơi xuống vỉ, phồng nhẹ, khói nhỏ và tàn than đỏ bay lên | – |
+| Lắc bịch | Bịch nghiêng theo hướng vuốt ±15°, topping xáo trộn, thanh "Độ đều" tăng | mỗi lần 0,15 giây |
+| Cuốn bánh | Bánh cuộn tròn từ dưới lên theo ngón tay | 0,4 giây |
+| Gấp bánh nướng | Bánh gập đôi thành nửa vầng trăng | 0,3 giây |
 | Món chín | 3 tia lấp lánh ✨ | 0,4 giây |
 | Món cháy | Chuyển màu đen, khói xám dày | 0,5 giây |
 | Giao đúng | Khách nhảy lên 20px, 3 trái tim nhỏ bay lên, đồng xu bay về HUD (cong), số tiền "+22k" màu vàng bay lên mờ dần | 0,8 giây |
@@ -502,7 +545,11 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 | `music_ending.mp3` | EndingScene | Piano/acoustic cảm động |
 | `sfx_tap.mp3` | Chạm nút | Ngắn |
 | `sfx_add.mp3` | Thêm nguyên liệu | "Pụp" |
-| `sfx_sizzle.mp3` | Đang chiên | Lặp khi có món trên bếp |
+| `sfx_sizzle.mp3` | Bánh trên vỉ than | Lặp khi có bánh trên vỉ, to dần khi sắp cháy |
+| `sfx_shake.mp3` | Lắc bịch bánh tráng | Tiếng sột soạt nilon, mỗi lần vuốt 1 tiếng |
+| `sfx_crack.mp3` | Đập trứng cút | "Cạch" nhỏ |
+| `sfx_roll.mp3` | Cuốn bánh | Tiếng sột nhẹ |
+| `sfx_pour.mp3` | Rót nước | Lặp trong lúc nhấn giữ |
 | `sfx_ready.mp3` | Món chín | "Ting" |
 | `sfx_burn.mp3` | Món cháy | "Xèo" + "phụt" |
 | `sfx_coin.mp3` | Nhận tiền | Leng keng |
@@ -574,7 +621,7 @@ Qua màn 15 → [Kết thúc đặc biệt] → mở khoá Màn bí mật
 "Lâu quá à...", "Thôi đi chỗ khác!", "Đói xỉu rồi 😩"
 
 ### 19.5 Khách "Anh" nói (ngẫu nhiên) — `[ĐIỀN: thêm câu riêng của hai người]`
-"Anh đói, nhưng nhớ em hơn 💕", "Món nào em làm cũng ngon nhất!", "Cho anh một phần xôi và một phần trái tim em nhé", "Bà chủ đáng yêu quá!", "Anh ghé chỉ để nhìn em thôi 😳"
+"Anh đói, nhưng nhớ em hơn 💕", "Món nào em làm cũng ngon nhất!", "Cho anh một bịch bánh tráng và một phần trái tim em nhé", "Bánh tráng em trộn ngon hơn cả trường bên kia!", "Anh thích nhất là món em thích nhất 😋", "Bà chủ đáng yêu quá!", "Anh ghé chỉ để nhìn em thôi 😳"
 
 ### 19.6 Động viên khi thua
 "Không sao, mình làm lại nha! 💪", "Em làm tốt lắm rồi, thử lần nữa nào!", "Anh tin em làm được mà ❤️"
@@ -717,14 +764,14 @@ Game được coi là **xong** khi tất cả đều đúng:
 | Thao tác | Dùng cho | Chi tiết |
 |---|---|---|
 | **Chạm** | Thêm nguyên liệu thường | Như mục 6 |
-| **Nhấn giữ đến khi vòng tròn đầy** | Rưới mỡ hành, chan nước sốt, rót trà hoặc sữa đậu | Giữ 0,8 giây (rót đồ uống 2 giây). Vòng tròn tiến độ quanh ngón tay. Thả sớm thì không tính. Phát âm thanh rót hoặc bóp trong lúc giữ. |
-| **Canh thời điểm (kim vào vùng xanh)** | Chiên trứng, nướng chả, pha cà phê | Thanh ngang có kim chạy từ trái sang phải. Vùng **xanh** = chín vừa (thưởng +10% tiền), vùng **vàng** trước và sau = tạm được, vùng **đỏ** cuối = cháy. Chạm để lấy ra. Nâng cấp "Bếp to lửa" làm vùng xanh rộng hơn. Thay cho cơ chế "chín sau X giây" ở mục 7. |
+| **Nhấn giữ đến khi vòng tròn đầy** | Tán trứng trên bánh nướng, rót trà hoặc nước mía | Giữ 0,8 giây (rót đồ uống 2 giây). Vòng tròn tiến độ quanh ngón tay. Thả sớm thì không tính. Phát âm thanh rót hoặc bóp trong lúc giữ. |
+| **Canh thời điểm (kim vào vùng xanh)** | Nướng bánh tráng trên vỉ than | Thanh ngang có kim chạy từ trái sang phải. Vùng **xanh** = chín vừa (thưởng +10% tiền), vùng **vàng** trước và sau = tạm được, vùng **đỏ** cuối = cháy. Chạm để lấy ra. Nâng cấp "Bếp to lửa" làm vùng xanh rộng hơn. Thay cho cơ chế "chín sau X giây" ở mục 7. |
 | **Vuốt ngang** | Chuyển giữa quầy đồ ăn và quầy nước | Có nút mũi tên ở hai bên cho ai không quen vuốt. Có chấm chỉ quầy đang đứng. |
 
 ### 25.6 Yêu cầu riêng của khách [BẮT BUỘC]
 
 - Bong bóng gọi món có thêm **dòng ghi chú** màu cam, ví dụ:
-  - "không hành", "thêm trứng", "ít ruốc", "nhiều đá"
+  - "không rau răm", "thêm trứng cút", "nhiều khô bò", "không xoài", "ít đá", "nướng giòn" (phải trúng vùng xanh)
   - **Độ cay 0–3** cho món có tương ớt: 🌶️ hiện bằng số quả ớt. Chọn độ cay bằng cách chạm chai tương nhiều lần (mỗi lần +1 cấp, hiện số trên khay).
 - Từ ngày 3: 30% đơn có 1 yêu cầu riêng. Từ ngày 8: 50% đơn, tối đa 2 yêu cầu.
 - Làm đúng yêu cầu: +5k tip và câu khen "Nhớ ý chị ghê!". Sai yêu cầu: tính là sai món.
@@ -784,7 +831,7 @@ Mỗi loại khách có bộ xưng hô riêng, dùng trong lời gọi món và 
 ### 25.12 Tiến triển dài hạn [NÊN CÓ]
 
 - **Cấp tiệm và danh hiệu**: mỗi món bán được +XP. Các mốc danh hiệu do AI đặt, ví dụ "Gánh hàng nhỏ" → "Tiệm đầu ngõ" → "Tiệm quen khu phố" → "Tiệm nổi tiếng" → "Tiệm của {herName}, nhất quả đất".
-- **Nhiệm vụ hằng ngày**: 3 nhiệm vụ mỗi ngày (thật, theo giờ Việt Nam), ví dụ "Bán 10 phần xôi gà", "Phục vụ 5 khách 5 sao liên tiếp". Mỗi nhiệm vụ thưởng 20–40k.
+- **Nhiệm vụ hằng ngày**: 3 nhiệm vụ mỗi ngày (thật, theo giờ Việt Nam), ví dụ "Bán 10 bịch bánh tráng trộn", "Phục vụ 5 khách 5 sao liên tiếp". Mỗi nhiệm vụ thưởng 20–40k.
 - **Quà điểm danh 7 ngày**: mỗi ngày mở game nhận quà, ngày 7 nhận quà lớn và **1 lời nhắn ngắn từ "Anh"** `[ĐIỀN: 7 câu nhắn]`.
 - **Sổ thu chi** cuối ngày: doanh thu, tiền nhập hàng, tip, lãi. Chỉ để xem, không có phí điện nước phạt người chơi.
 - **Chơi lại ngày**: lưu một điểm khôi phục đầu mỗi ngày. Trong menu tạm dừng có nút "Làm lại ngày này".
@@ -818,7 +865,7 @@ Mỗi loại khách có bộ xưng hô riêng, dùng trong lời gọi món và 
 
 1. Tên / biệt danh bạn gái? Tên / biệt danh của bạn?
 2. Ngày quen nhau (để đếm số ngày)?
-3. Món chủ đề giữ **xôi + bánh mì** hay đổi sang món khác (trà sữa, bánh tráng trộn, phở...)?
+3. ✅ Đã chốt: **bánh tráng**. Cô ấy thích loại bánh tráng nào nhất (trộn, nướng, cuốn bơ...)? Có quán bánh tráng nào hai người hay ăn không (đặt tên tiệm theo đó)?
 4. Món cô ấy thích nhất?
 5. 6 tên bạn bè chung?
 6. 15 kỷ niệm: tiêu đề + ngày + vài dòng + ảnh (có thể gửi sau, game vẫn chạy với ảnh thay thế).
